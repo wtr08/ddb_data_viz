@@ -1,4 +1,4 @@
-# Funda AI Project
+# Data Visualization
 
 IMPORTANT to contributors:
 1. Comment to contributors. Add a folder "data" in the root folder, after the project has been cloned. Gitignore will neglect the "data" folder. Link to datasets: https://drive.google.com/drive/folders/1T9CvMdY6XCnMUqCuxfAk_ixe9joLqAYs?usp=sharing
