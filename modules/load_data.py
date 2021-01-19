@@ -2,16 +2,19 @@ import pandas as pd
 import numpy as np
 import os
 
-# class DataLoaderHood(object):
+class DataLoaderHood(object):
 
-#     def __init__(self, base_folder):
-#         self.base_folder = base_folder
+     def __init__(self, woningvoorraad):
+         #self.base_folder = base_folder
+         self.woningvoorraad = woningvoorraad
 
-#     def load_data(self):
-#         #import Data
-#         df = pd.read_csv(self.base_folder)
-
-
+     def load_data_woning(self):
+         #import Data
+         #df = pd.read_csv(self.base_folder)
+         woningvoorraad = pd.read_csv(self.woningvoorraad, sep = ';')
+         return {
+            "woningvoorraad" : woningvoorraad
+            }
     
         
 class DataLoaderMun(object):
@@ -31,8 +34,7 @@ class DataLoaderMun(object):
         verkoop = pd.read_csv(self.cbs_verkoop, sep = ';')
         voorraad_woningen = pd.read_csv(self.cbs_voorraad_woningen, sep = ';')
         cbs_gemeente_flow = pd.read_csv(self.cbs_gemeente_flow, sep = ';')
-
-
+        
         return {
             "postcode" : postcode, 
             "gemeentenaam" : gemeentenaam,

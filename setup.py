@@ -13,5 +13,5 @@ setup(
         "seaborn",
         'tensorflow'
     ],
-    python_requires="==3.8.3"
+    python_requires="==3.8.5"
 ) 

@@ -33,7 +33,7 @@ def main():
     merged_dataset = DataMergeMun().merge(Data["postcode"], Data["gemeentenaam"], Data["verkoop"], Data["voorraad_woningen"], Data["gemeente_flow"])
 
     merged_dataset
-    merged_dataset.to_csv("/Users/woutervanrijmenam/Documents/Sites/data_vis/data/storage/municipality_data.csv", sep=';' , decimal=",")
+    merged_dataset.to_csv("/Users/suleymanekiz/Desktop/ddb_data_viz/data/municipality_data.csv", sep=';' , decimal=",")
 
     return merged_dataset
 

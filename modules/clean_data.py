@@ -1,7 +1,16 @@
 import pandas as pd
 import numpy as np
 
-#class DataMergeHood(object):
+class DataMergeHood(object):
+    def __init__(self):
+        pass
+
+    def mergehood(self, woningvoorraad):
+        
+        woningvoorraad = woningvoorraad.drop(['Afstand_tot_school_km', 'Afstand_tot_kinderdagverblijf_km', 'Afstand_tot_grote_supermarkt_km', 'Afstand_tot_huisartsenpraktijk_km', 'Geweld', 'Vernieling', 'Diefstal_uit_woning', 'Soort_regio', 'codering'], axis=1)        
+        return woningvoorraad
+
+
 
 
 class DataMergeMun(object):
