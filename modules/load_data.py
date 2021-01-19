@@ -16,19 +16,27 @@ import os
         
 class DataLoaderMun(object):
 
-    def __init__(self, cbs_postcode, cbs_gemeentenaam, cbs_verkoop, cbs_voorraad_woningen):
+    def __init__(self, cbs_postcode, cbs_gemeentenaam, cbs_verkoop, cbs_voorraad_woningen, cbs_gemeente_flow):
         self.cbs_postcode = cbs_postcode
         self.cbs_gemeentenaam = cbs_gemeentenaam
         self.cbs_verkoop = cbs_verkoop
         self.cbs_voorraad_woningen = cbs_voorraad_woningen
+        self.cbs_gemeente_flow = cbs_gemeente_flow
 
 
-    def load_cbs(self, cbs_postcode, cbs_gemeentenaam, cbs_verkoop, cbs_voorraad_woningen):
+    def load_cbs(self):
 
         postcode = pd.read_csv(self.cbs_postcode, sep = ';')
         gemeentenaam = pd.read_csv(self.cbs_gemeentenaam, sep = ';')
         verkoop = pd.read_csv(self.cbs_verkoop, sep = ';')
         voorraad_woningen = pd.read_csv(self.cbs_voorraad_woningen, sep = ';')
+        cbs_gemeente_flow = pd.read_csv(self.cbs_gemeente_flow, sep = ';')
 
 
-        return postcode, gemeentenaam, verkoop, voorraad_woningen
+        return {
+            "postcode" : postcode, 
+            "gemeentenaam" : gemeentenaam,
+            "verkoop" : verkoop,
+            "voorraad_woningen" : voorraad_woningen,
+            "gemeente_flow" : cbs_gemeente_flow
+            }

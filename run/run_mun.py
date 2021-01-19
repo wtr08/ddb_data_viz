@@ -10,7 +10,7 @@ from modules.clean_data import DataMergeMun
 
 def main():
     # here goes the pipeline code
-    with open(r'C:\Users\Fedde\OneDrive\Documenten\GitHub\ddb_data_viz\run\conf.json', 'r') as f:
+    with open(r'./conf.json', 'r') as f:
         conf = json.load(f)
     
     
@@ -19,14 +19,23 @@ def main():
     cbs_gemeentenaam=conf['cbs_gemeentenaam']
     cbs_verkoop=conf['cbs_verkoop']
     cbs_voorraad_woningen=conf['cbs_voorraad_woningen']
-    cbs_dataloader = DataLoaderMun(cbs_postcode, cbs_gemeentenaam, cbs_verkoop, cbs_voorraad_woningen)
-    cbs_data = cbs_dataloader.load_cbs(cbs_postcode, cbs_gemeentenaam, cbs_verkoop, cbs_voorraad_woningen)
+    cbs_gemeente_flow = conf["gemeente_flow"]
+    
+    Data = DataLoaderMun(cbs_postcode, cbs_gemeentenaam, cbs_verkoop, cbs_voorraad_woningen, cbs_gemeente_flow).load_cbs()
 
-    #merge datA
-    merge_price_stock = DataMergeMun().merge(cbs_data[0], cbs_data[1], cbs_data[2], cbs_data[3])
+    postcode = Data["postcode"]
+    gemeentenaam = Data["gemeentenaam"]
+    verkoop = Data["verkoop"]
+    voorraad_woningen = Data["voorraad_woningen"]
+    gemeente_flow = Data["gemeente_flow"]
 
+    #merge data
+    merged_dataset = DataMergeMun().merge(Data["postcode"], Data["gemeentenaam"], Data["verkoop"], Data["voorraad_woningen"], Data["gemeente_flow"])
 
-    return print(merge_price_stock)
+    merged_dataset
+    merged_dataset.to_csv("/Users/woutervanrijmenam/Documents/Sites/data_vis/data/storage/municipality_data.csv", sep=';' , decimal=",")
+
+    return merged_dataset
 
 if __name__ == "__main__":
     # the main function above is called when the script is
