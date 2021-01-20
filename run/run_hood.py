@@ -15,22 +15,31 @@ def main():
         conf = json.load(f)
     
     
-    #Load housing data
-
-    #base_folder=conf['base_folder']
-    #housing_dataloader = DataLoader(base_folder)
-    #housing_data = housing_dataloader.load_data()
-
-    #load woningvoorraad
+    #Load data
+    base_folder=conf['base_folder']
     woningvoorraad=conf['woningvoorraad']
-    woningvoorraad_dataloader = DataLoaderHood(woningvoorraad)
-    woningvoorraad = woningvoorraad_dataloader.load_data_woning()
+    postcode = conf["cbs_postcode"]
+    gemeentenaam = conf["cbs_gemeentenaam"]
+    buurtnaam = conf["buurtnaam"]
+    
+
+
+    datahood = DataLoaderHood(base_folder, woningvoorraad, postcode, gemeentenaam, buurtnaam).load_data_woning()
+
+    housing_data = datahood["df"]
+    woningvoorraad = datahood["woningvoorraad"]
+    postcode = datahood["postcode"]
+    gemeentenaam = datahood["gemeentenaam"]
+    buurtnaam = datahood["buurtnaam"]
+    
 
     #clean woningvoorraad
-    cleanwoningvoorraad = DataMergeHood().mergehood(woningvoorraad)
+    #cleanwoningvoorraad = DataMergeHood().mergehood(woningvoorraad)
+    merged_dataset = DataMergeHood().mergehood(datahood["df"], datahood["woningvoorraad"], datahood["postcode"], datahood["gemeentenaam"], datahood["buurtnaam"])
 
+    merged_dataset.to_csv("/Users/Fedde/OneDrive/Documenten/GitHub/ddb_data_viz/data/datahood_data.csv", sep=';' , decimal=",")
 
-    return print(cleanwoningvoorraad)
+    return merged_dataset.head
 
 if __name__ == "__main__":
     # the main function above is called when the script is
