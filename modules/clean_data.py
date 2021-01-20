@@ -27,6 +27,9 @@ class DataMergeHood(object):
         postcode_gemeente_buurt = pd.merge(postcode_gemeente_buurt_oppervlakte, woningvoorraad, how='left', left_on='Buurtcode', right_on='codering')
         postcode_gemeente_buurt = postcode_gemeente_buurt.drop(['Gemeentenaam_y', 'codering'], axis=1)
 
+        postcode_gemeente_buurt = pd.merge(postcode_gemeente_buurt, postcode, how='left', left_on='Buurtcode', right_on='Buurt2018')
+        postcode_gemeente_buurt = postcode_gemeente_buurt.drop(['Buurt2018', 'Wijk2018', 'Gemeente2018'], axis=1)
+
         return postcode_gemeente_buurt
 
 

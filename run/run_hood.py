@@ -39,7 +39,7 @@ def main():
 
     merged_dataset.to_csv("/Users/Fedde/OneDrive/Documenten/GitHub/ddb_data_viz/data/datahood_data.csv", sep=';' , decimal=",")
 
-    return merged_dataset.head
+    return merged_dataset
 
 if __name__ == "__main__":
     # the main function above is called when the script is
