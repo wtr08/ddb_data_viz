@@ -20,20 +20,21 @@ def main():
     cbs_verkoop=conf['cbs_verkoop']
     cbs_voorraad_woningen=conf['cbs_voorraad_woningen']
     cbs_gemeente_flow = conf["gemeente_flow"]
+    wijken = conf["wijkenbuurten"]
     
-    Data = DataLoaderMun(cbs_postcode, cbs_gemeentenaam, cbs_verkoop, cbs_voorraad_woningen, cbs_gemeente_flow).load_cbs()
+    Data = DataLoaderMun(cbs_postcode, cbs_gemeentenaam, cbs_verkoop, cbs_voorraad_woningen, cbs_gemeente_flow, wijken).load_cbs()
 
     postcode = Data["postcode"]
     gemeentenaam = Data["gemeentenaam"]
     verkoop = Data["verkoop"]
     voorraad_woningen = Data["voorraad_woningen"]
     gemeente_flow = Data["gemeente_flow"]
+    wijken = Data["wijken"]
 
     #merge data
-    merged_dataset = DataMergeMun().merge(Data["postcode"], Data["gemeentenaam"], Data["verkoop"], Data["voorraad_woningen"], Data["gemeente_flow"])
+    merged_dataset = DataMergeMun().merge(Data["postcode"], Data["gemeentenaam"], Data["verkoop"], Data["voorraad_woningen"], Data["gemeente_flow"], Data["wijken"])
 
-    merged_dataset
-    merged_dataset.to_csv("/Users/woutervanrijmenam/Documents/Sites/data_vis/data/storage/municipality_data.csv", sep=';' , decimal=",")
+    merged_dataset.to_csv("/Users/Fedde/OneDrive/Documenten/GitHub/ddb_data_viz/data/datamunicipality_data.csv", sep=';' , decimal=",")
 
     return merged_dataset
 
